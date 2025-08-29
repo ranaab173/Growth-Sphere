@@ -1,0 +1,5 @@
+{
+  "name": "Growth Sphere",
+  "description": "A fully functional replica of a modern landing page for a personal growth platform called Growth Sphere, built with React, TypeScript, and Tailwind CSS. It showcases various sections including a video hero, program listings, testimonials, and FAQs with a modern, dark-themed UI.",
+  "requestFramePermissions": []
+}
