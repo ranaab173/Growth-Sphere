@@ -6,10 +6,11 @@ interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline';
   className?: string;
   size?: 'sm' | 'md' | 'lg';
+  href?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, onClick, variant = 'primary', className = '', size = 'md' }) => {
-  const baseStyles = 'font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 transition-transform transform hover:scale-105';
+const Button: React.FC<ButtonProps> = ({ children, onClick, variant = 'primary', className = '', size = 'md', href }) => {
+  const baseStyles = 'inline-block font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 transition-transform transform hover:scale-105 text-center';
 
   const sizeStyles = {
     sm: 'px-4 py-2 text-sm',
@@ -23,10 +24,20 @@ const Button: React.FC<ButtonProps> = ({ children, onClick, variant = 'primary',
     outline: 'bg-transparent border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white focus:ring-gray-800',
   };
 
+  const combinedClasses = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;
+
+  if (href) {
+    return (
+      <a href={href} className={combinedClasses}>
+        {children}
+      </a>
+    );
+  }
+
   return (
     <button
       onClick={onClick}
-      className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
+      className={combinedClasses}
     >
       {children}
     </button>

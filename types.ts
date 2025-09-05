@@ -26,6 +26,7 @@ export interface Feature {
     icon: JSX.Element;
     title: string;
     description: string;
+    href: string;
 }
 
 export interface Blog {
@@ -33,4 +34,10 @@ export interface Blog {
     category: string;
     title: string;
     excerpt: string;
+}
+
+export interface GalleryImage {
+  src: string;
+  title: string;
+  description: string;
 }

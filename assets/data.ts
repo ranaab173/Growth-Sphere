@@ -1,4 +1,4 @@
-import type { Program, Instructor, Testimonial, FaqItem, Feature, Blog } from '../types';
+import type { Program, Instructor, Testimonial, FaqItem, Feature, Blog, GalleryImage } from '../types';
 import React from 'react';
 
 const logoClasses = "h-6 md:h-8 mx-12 object-contain grayscale flex-shrink-0";
@@ -25,28 +25,28 @@ export const partnerLogos: React.ReactNode[] = [
 
 export const featuresData: Feature[] = [
     {
-        // FIX: Replaced JSX with React.createElement to be valid in a .ts file.
         icon: React.createElement('i', { className: "fa-solid fa-graduation-cap text-3xl text-sky-500" }),
         title: 'AI Guided Programs',
-        description: 'Experience a highly personalized growth journey with our new AI-powered curriculum.'
+        description: 'Experience a highly personalized growth journey with our new AI-powered curriculum.',
+        href: '#/ai-guided-programs',
     },
     {
-        // FIX: Replaced JSX with React.createElement to be valid in a .ts file.
         icon: React.createElement('i', { className: "fa-solid fa-users text-3xl text-sky-500" }),
         title: 'Live Classes',
-        description: 'Join live classes with the world\'s best teachers, every single day.'
+        description: 'Join live classes with the world\'s best teachers, every single day.',
+        href: '#/live-classes',
     },
     {
-        // FIX: Replaced JSX with React.createElement to be valid in a .ts file.
         icon: React.createElement('i', { className: "fa-solid fa-network-wired text-3xl text-sky-500" }),
         title: 'Global Community',
-        description: 'Connect with a global community of like-minded individuals.'
+        description: 'Connect with a global community of like-minded individuals.',
+        href: '#/global-community',
     },
     {
-        // FIX: Replaced JSX with React.createElement to be valid in a .ts file.
         icon: React.createElement('i', { className: "fa-solid fa-lightbulb text-3xl text-sky-500" }),
         title: 'Meditations',
-        description: 'Access a library of powerful meditations for every need.'
+        description: 'Access a library of powerful meditations for every need.',
+        href: '#/meditations',
     }
 ];
 
@@ -134,17 +134,57 @@ export const faqData: FaqItem[] = [
   },
 ];
 
-export const galleryImagesData: string[] = [
-    'https://images.unsplash.com/photo-1454942901704-3c44c11b2ad1?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1516298773066-c48f8e9bd92b?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1508672019048-805c876b67e2?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1470240731273-7821a6eeb6bd?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1588421357574-87938a86fa28?q=80&w=1200&auto=format&fit=crop',
+export const galleryImagesData: GalleryImage[] = [
+    {
+        src: 'https://images.unsplash.com/photo-1454942901704-3c44c11b2ad1?q=80&w=1200&auto=format&fit=crop',
+        title: 'Mountain Retreat',
+        description: 'Members finding clarity and focus during our annual mountain retreat.'
+    },
+    {
+        src: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=1200&auto=format&fit=crop',
+        title: 'Sunrise Session',
+        description: 'An early morning meditation session to start the day with intention.'
+    },
+    {
+        src: 'https://images.unsplash.com/photo-1516298773066-c48f8e9bd92b?q=80&w=1200&auto=format&fit=crop',
+        title: 'Live Workshop',
+        description: 'Engaging with instructors in a hands-on, interactive workshop.'
+    },
+    {
+        src: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1200&auto=format&fit=crop',
+        title: 'Community Connection',
+        description: 'Building lifelong friendships with like-minded individuals from around the globe.'
+    },
+    {
+        src: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?q=80&w=1200&auto=format&fit=crop',
+        title: 'Exploring Nature',
+        description: 'Finding inspiration and connection during a group nature walk.'
+    },
+    {
+        src: 'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=1200&auto=format&fit=crop',
+        title: 'Peak Performance',
+        description: 'Celebrating a breakthrough moment at a personal mastery event.'
+    },
+    {
+        src: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=1200&auto=format&fit=crop',
+        title: 'Team Collaboration',
+        description: 'Working together to solve challenges in a "For Business" workshop.'
+    },
+    {
+        src: 'https://images.unsplash.com/photo-1470240731273-7821a6eeb6bd?q=80&w=1200&auto=format&fit=crop',
+        title: 'Creative Expression',
+        description: 'Unlocking creativity through art and movement sessions.'
+    },
+    {
+        src: 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=1200&auto=format&fit=crop',
+        title: 'Peaceful Moments',
+        description: 'A moment of quiet reflection and gratitude.'
+    },
+    {
+        src: 'https://images.unsplash.com/photo-1588421357574-87938a86fa28?q=80&w=1200&auto=format&fit=crop',
+        title: 'Global Meetup',
+        description: 'Connecting with the local Growth Sphere community in a city meetup.'
+    },
 ];
 
 export const blogPostsData: Blog[] = [

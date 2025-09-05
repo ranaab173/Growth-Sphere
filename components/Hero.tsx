@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
           <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl shadow-text">
             Tap into your full potential. Join a global community of learners and get access to 100+ programs by the world’s best minds.
           </p>
-          <Button size="lg" variant="primary">Join Growth Sphere</Button>
+          <Button href="#/join" size="lg" variant="primary">Join Growth Sphere</Button>
         </div>
       </section>
 

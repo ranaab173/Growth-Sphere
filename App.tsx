@@ -1,32 +1,86 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import WhatIsMindvalley from './components/WhatIsMindvalley';
-import Programs from './components/Programs';
-import Instructors from './components/Instructors';
-import Community from './components/Community';
-import Testimonials from './components/Testimonials';
-import Membership from './components/Membership';
-import Faq from './components/Faq';
 import Footer from './components/Footer';
-import Gallery from './components/Gallery';
-import Blog from './components/Blog';
+import HomePage from './pages/HomePage';
+import ProgramsListPage from './pages/ProgramsListPage';
+import ProgramDetailPage from './pages/ProgramDetailPage';
+import InstructorsListPage from './pages/InstructorsListPage';
+import InstructorDetailPage from './pages/InstructorDetailPage';
+import BlogListPage from './pages/BlogListPage';
+import BlogPostPage from './pages/BlogPostPage';
+import JoinPage from './pages/JoinPage';
+import LoginPage from './pages/LoginPage';
+import AccountPage from './pages/AccountPage';
+import GenericPage from './pages/GenericPage';
+
+// Data for Generic Pages
+const genericPageData: { [key: string]: { title: string; content: string } } = {
+    'channels': { title: 'Channels', content: 'Discover curated content streams designed for your continuous growth. More coming soon.' },
+    'live-events': { title: 'Live Events', content: 'Join live events with world-class teachers and our global community. Check back for our 2024 schedule.' },
+    'for-business': { title: 'For Business', content: 'Elevate your team with Growth Sphere for Business. Contact us to learn about our corporate packages.' },
+    'ai-guided-programs': { title: 'AI Guided Programs', content: 'Experience a highly personalized growth journey with our new AI-powered curriculum that adapts to your unique goals.' },
+    'live-classes': { title: 'Live Classes', content: 'Join live classes with the world\'s best teachers, every single day. Interact, ask questions, and grow in real-time.' },
+    'global-community': { title: 'Global Community', content: 'Connect with a global community of like-minded individuals who will support and inspire you on your journey.' },
+    'meditations': { title: 'Meditations', content: 'Access a library of powerful guided meditations for every need, from stress-relief to peak performance.' },
+};
 
 function App() {
+  const [route, setRoute] = useState(window.location.hash);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setRoute(window.location.hash);
+      window.scrollTo(0, 0); // Scroll to top on page change
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    
+    if (!window.location.hash || window.location.hash === '#') {
+      window.location.hash = '#/';
+    }
+    
+    // Initial load route handling
+    handleHashChange();
+
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const renderPage = () => {
+    const path = route.replace(/^#/, '') || '/';
+    const pathParts = path.split('/').filter(Boolean);
+    const basePath = pathParts[0] || '/';
+    const slug = pathParts[1];
+
+    if (genericPageData[basePath]) {
+        const { title, content } = genericPageData[basePath];
+        return <GenericPage title={title} content={content} />;
+    }
+    
+    switch (basePath) {
+      case '/':
+        return <HomePage />;
+      case 'programs':
+        return slug ? <ProgramDetailPage slug={slug} /> : <ProgramsListPage />;
+      case 'instructors':
+        return slug ? <InstructorDetailPage slug={slug} /> : <InstructorsListPage />;
+      case 'blog':
+        return slug ? <BlogPostPage slug={slug} /> : <BlogListPage />;
+      case 'join':
+        return <JoinPage />;
+      case 'login':
+        return <LoginPage />;
+      case 'account':
+          return <AccountPage />;
+      default:
+        return <GenericPage title="404 - Not Found" content="The page you are looking for does not exist." />;
+    }
+  };
+
   return (
     <div className="text-gray-800 font-sans">
       <Header />
       <main>
-        <Hero />
-        <WhatIsMindvalley />
-        <Programs />
-        <Instructors />
-        <Gallery />
-        <Community />
-        <Testimonials />
-        <Blog />
-        <Membership />
-        <Faq />
+        {renderPage()}
       </main>
       <Footer />
     </div>

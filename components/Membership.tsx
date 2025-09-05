@@ -31,7 +31,7 @@ const Membership: React.FC = () => {
             </ul>
           </div>
           <div className="text-center">
-            <Button size="lg" variant="primary" className="w-full md:w-auto">
+            <Button href="#/join" size="lg" variant="primary" className="w-full md:w-auto">
                 Become A Member
             </Button>
             <p className="mt-4 text-gray-500 text-sm">Cancel anytime. 100% satisfaction guaranteed.</p>

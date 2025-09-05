@@ -3,15 +3,15 @@ import { featuresData } from '../assets/data';
 import type { Feature } from '../types';
 
 const FeatureCard: React.FC<{ feature: Feature }> = ({ feature }) => (
-    <div className="bg-white p-8 rounded-lg border border-gray-200 hover:border-sky-300 transition-all duration-300 transform hover:-translate-y-1 shadow-sm hover:shadow-lg">
+    <a href={feature.href} className="block bg-white p-8 rounded-lg border border-gray-200 hover:border-sky-300 transition-all duration-300 transform hover:-translate-y-1 shadow-sm hover:shadow-lg">
         <div className="mb-4">{feature.icon}</div>
         <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
         <p className="text-gray-600">{feature.description}</p>
-    </div>
+    </a>
 );
 
 
-const WhatIsMindvalley: React.FC = () => {
+const WhatIsGrowthSphere: React.FC = () => {
   return (
     <section className="py-20 bg-gray-50 text-gray-800">
       <div className="container mx-auto px-6 text-center">
@@ -29,4 +29,4 @@ const WhatIsMindvalley: React.FC = () => {
   );
 };
 
-export default WhatIsMindvalley;
+export default WhatIsGrowthSphere;

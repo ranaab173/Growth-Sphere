@@ -13,16 +13,21 @@ const Header: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navLinks = ["Channels", "Programs", "Live Events", "For Business"];
+    const navLinks = [
+        { name: "Channels", href: "#/channels" },
+        { name: "Programs", href: "#/programs" },
+        { name: "Live Events", href: "#/live-events" },
+        { name: "For Business", href: "#/for-business" },
+    ];
 
     return (
         <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-sm shadow-md' : 'bg-transparent'}`}>
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-                <div className="text-2xl font-bold text-gray-800 tracking-wider">GROWTH SPHERE</div>
+                <a href="#/" className="text-2xl font-bold text-gray-800 tracking-wider">GROWTH SPHERE</a>
                 
                 <nav className="hidden lg:flex items-center space-x-8">
                     {navLinks.map(link => (
-                        <a key={link} href="#" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">{link}</a>
+                        <a key={link.name} href={link.href} className="text-gray-600 hover:text-gray-900 transition-colors font-medium">{link.name}</a>
                     ))}
                 </nav>
 
@@ -30,8 +35,8 @@ const Header: React.FC = () => {
                     <button className="text-gray-600 hover:text-gray-900 transition-colors">
                         <i className="fa-solid fa-search"></i>
                     </button>
-                    <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Log In</a>
-                    <Button variant="outline" size="sm">Join Growth Sphere</Button>
+                    <a href="#/login" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Log In</a>
+                    <Button href="#/join" variant="outline" size="sm">Join Growth Sphere</Button>
                 </div>
 
                 <div className="lg:hidden">
@@ -46,11 +51,11 @@ const Header: React.FC = () => {
                 <div className="lg:hidden bg-white/95 backdrop-blur-md absolute top-full left-0 w-full shadow-lg">
                     <nav className="flex flex-col items-center space-y-4 py-6">
                         {navLinks.map(link => (
-                            <a key={link} href="#" className="text-gray-600 hover:text-gray-900 transition-colors text-lg">{link}</a>
+                            <a key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-gray-600 hover:text-gray-900 transition-colors text-lg">{link.name}</a>
                         ))}
                         <div className="flex flex-col items-center space-y-4 pt-4">
-                            <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">Log In</a>
-                            <Button variant="primary" size="md">Join Growth Sphere</Button>
+                            <a href="#/login" onClick={() => setIsMenuOpen(false)} className="text-gray-600 hover:text-gray-900 transition-colors">Log In</a>
+                            <Button href="#/join" onClick={() => setIsMenuOpen(false)} variant="primary" size="md">Join Growth Sphere</Button>
                         </div>
                     </nav>
                 </div>

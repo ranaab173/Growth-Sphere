@@ -3,6 +3,8 @@ import { programsData } from '../assets/data';
 import ProgramCard from './ui/ProgramCard';
 import Button from './ui/Button';
 
+const slugify = (text: string) => text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+
 const Programs: React.FC = () => {
   return (
     <section className="py-20 bg-white text-gray-800">
@@ -16,11 +18,13 @@ const Programs: React.FC = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {programsData.map((program, index) => (
-            <ProgramCard key={index} program={program} />
+            <a key={index} href={`#/programs/${slugify(program.title)}`} className="block">
+                <ProgramCard program={program} />
+            </a>
           ))}
         </div>
         <div className="text-center">
-          <Button variant="secondary" size="lg">Browse All Programs</Button>
+          <Button href="#/programs" variant="secondary" size="lg">Browse All Programs</Button>
         </div>
       </div>
     </section>

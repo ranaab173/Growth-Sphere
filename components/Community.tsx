@@ -25,7 +25,7 @@ const Community: React.FC = () => {
                 <StatItem value="500+" label="Local Meetups" />
             </div>
 
-            <Button size="lg" variant="primary">Become a Member</Button>
+            <Button href="#/join" size="lg" variant="primary">Become a Member</Button>
         </div>
     </section>
   );

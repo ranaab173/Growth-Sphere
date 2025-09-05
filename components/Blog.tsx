@@ -3,6 +3,8 @@ import { blogPostsData } from '../assets/data';
 import BlogPostCard from './ui/BlogPostCard';
 import Button from './ui/Button';
 
+const slugify = (text: string) => text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+
 const Blog: React.FC = () => {
   return (
     <section className="py-20 bg-white text-gray-800">
@@ -14,12 +16,12 @@ const Blog: React.FC = () => {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {blogPostsData.map((post, index) => (
-            <BlogPostCard key={index} post={post} />
+          {blogPostsData.slice(0, 3).map((post, index) => (
+            <BlogPostCard key={index} post={post} href={`#/blog/${slugify(post.title)}`} />
           ))}
         </div>
         <div className="text-center">
-          <Button variant="outline" size="lg">Visit The Blog</Button>
+          <Button href="#/blog" variant="outline" size="lg">Visit The Blog</Button>
         </div>
       </div>
     </section>
