@@ -3,6 +3,48 @@ import Button from '../components/ui/Button';
 
 const AccountPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState('profile');
+  
+  // State for Profile form
+  const [fullName, setFullName] = useState('Alex Morgan');
+  const [email, setEmail] = useState('alex.morgan@example.com');
+
+  // State for Password form
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  // State for Notifications
+  const [notifications, setNotifications] = useState({
+    announcements: true,
+    reminders: true,
+    events: false,
+  });
+
+  const handleProfileSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simulate API call
+    console.log('Saving profile:', { fullName, email });
+    alert('Profile saved successfully!');
+  };
+
+  const handlePasswordUpdate = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newPassword !== confirmPassword) {
+      alert("New passwords don't match!");
+      return;
+    }
+    // Simulate API call
+    console.log('Updating password');
+    alert('Password updated successfully!');
+    setCurrentPassword('');
+    setNewPassword('');
+    setConfirmPassword('');
+  };
+
+  const handleNotificationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setNotifications(prev => ({ ...prev, [name]: checked }));
+  };
 
   const renderContent = () => {
     switch (activeTab) {
@@ -10,9 +52,9 @@ const AccountPage: React.FC = () => {
         return (
           <div>
             <h2 className="text-2xl font-bold mb-4">Profile Information</h2>
-            <form className="space-y-4">
-              <input defaultValue="Alex Morgan" type="text" placeholder="Full Name" className="w-full p-3 border border-gray-300 rounded-lg"/>
-              <input defaultValue="alex.morgan@example.com" type="email" placeholder="Email Address" className="w-full p-3 border border-gray-300 rounded-lg"/>
+            <form onSubmit={handleProfileSave} className="space-y-4">
+              <input value={fullName} onChange={e => setFullName(e.target.value)} type="text" placeholder="Full Name" className="w-full p-3 border border-gray-300 rounded-lg"/>
+              <input value={email} onChange={e => setEmail(e.target.value)} type="email" placeholder="Email Address" className="w-full p-3 border border-gray-300 rounded-lg"/>
               <Button>Save Changes</Button>
             </form>
           </div>
@@ -21,10 +63,10 @@ const AccountPage: React.FC = () => {
         return (
           <div>
             <h2 className="text-2xl font-bold mb-4">Change Password</h2>
-            <form className="space-y-4">
-              <input type="password" placeholder="Current Password" className="w-full p-3 border border-gray-300 rounded-lg"/>
-              <input type="password" placeholder="New Password" className="w-full p-3 border border-gray-300 rounded-lg"/>
-              <input type="password" placeholder="Confirm New Password" className="w-full p-3 border border-gray-300 rounded-lg"/>
+            <form onSubmit={handlePasswordUpdate} className="space-y-4">
+              <input value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} type="password" placeholder="Current Password" className="w-full p-3 border border-gray-300 rounded-lg"/>
+              <input value={newPassword} onChange={e => setNewPassword(e.target.value)} type="password" placeholder="New Password" className="w-full p-3 border border-gray-300 rounded-lg"/>
+              <input value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} type="password" placeholder="Confirm New Password" className="w-full p-3 border border-gray-300 rounded-lg"/>
               <Button>Update Password</Button>
             </form>
           </div>
@@ -33,10 +75,19 @@ const AccountPage: React.FC = () => {
         return (
             <div>
                 <h2 className="text-2xl font-bold mb-4">Notification Settings</h2>
-                <div className="space-y-4">
-                    <div className="flex items-center justify-between"><label>New program announcements</label><input type="checkbox" className="h-5 w-5" defaultChecked/></div>
-                    <div className="flex items-center justify-between"><label>Weekly progress reminders</label><input type="checkbox" className="h-5 w-5" defaultChecked/></div>
-                    <div className="flex items-center justify-between"><label>Community event updates</label><input type="checkbox" className="h-5 w-5"/></div>
+                <div className="space-y-4 text-gray-700">
+                    <label className="flex items-center justify-between cursor-pointer">
+                      <span>New program announcements</span>
+                      <input name="announcements" type="checkbox" className="h-5 w-5 rounded" checked={notifications.announcements} onChange={handleNotificationChange}/>
+                    </label>
+                    <label className="flex items-center justify-between cursor-pointer">
+                      <span>Weekly progress reminders</span>
+                      <input name="reminders" type="checkbox" className="h-5 w-5 rounded" checked={notifications.reminders} onChange={handleNotificationChange}/>
+                    </label>
+                    <label className="flex items-center justify-between cursor-pointer">
+                      <span>Community event updates</span>
+                      <input name="events" type="checkbox" className="h-5 w-5 rounded" checked={notifications.events} onChange={handleNotificationChange}/>
+                    </label>
                 </div>
             </div>
         );
@@ -48,7 +99,7 @@ const AccountPage: React.FC = () => {
   const TabButton: React.FC<{tabId: string, children: React.ReactNode}> = ({tabId, children}) => (
     <button 
         onClick={() => setActiveTab(tabId)} 
-        className={`px-4 py-2 rounded-lg font-semibold ${activeTab === tabId ? 'bg-sky-500 text-white' : 'hover:bg-gray-200'}`}
+        className={`w-full text-left px-4 py-2 rounded-lg font-semibold transition-colors ${activeTab === tabId ? 'bg-sky-500 text-white' : 'hover:bg-gray-200'}`}
     >
         {children}
     </button>

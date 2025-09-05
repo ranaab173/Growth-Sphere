@@ -26,6 +26,17 @@ const genericPageData: { [key: string]: { title: string; content: string } } = {
 
 function App() {
   const [route, setRoute] = useState(window.location.hash);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+    window.location.hash = '#/account';
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    window.location.hash = '#/';
+  };
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -66,10 +77,22 @@ function App() {
       case 'blog':
         return slug ? <BlogPostPage slug={slug} /> : <BlogListPage />;
       case 'join':
-        return <JoinPage />;
+        if (isAuthenticated) {
+          window.location.hash = '#/account';
+          return null;
+        }
+        return <JoinPage onJoin={handleLogin} />;
       case 'login':
-        return <LoginPage />;
+        if (isAuthenticated) {
+          window.location.hash = '#/account';
+          return null;
+        }
+        return <LoginPage onLogin={handleLogin} />;
       case 'account':
+          if (!isAuthenticated) {
+            window.location.hash = '#/login';
+            return null;
+          }
           return <AccountPage />;
       default:
         return <GenericPage title="404 - Not Found" content="The page you are looking for does not exist." />;
@@ -78,7 +101,7 @@ function App() {
 
   return (
     <div className="text-gray-800 font-sans">
-      <Header />
+      <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} />
       <main>
         {renderPage()}
       </main>

@@ -29,24 +29,28 @@ export const featuresData: Feature[] = [
         title: 'AI Guided Programs',
         description: 'Experience a highly personalized growth journey with our new AI-powered curriculum.',
         href: '#/ai-guided-programs',
+        details: 'Our revolutionary AI engine acts as your personal guide, tailoring program recommendations and learning paths based on your unique goals, progress, and learning style. It helps you stay motivated with smart reminders and insights, ensuring you always know the next best step on your transformation journey.'
     },
     {
         icon: React.createElement('i', { className: "fa-solid fa-users text-3xl text-sky-500" }),
         title: 'Live Classes',
         description: 'Join live classes with the world\'s best teachers, every single day.',
         href: '#/live-classes',
+        details: 'Feel the energy of a live classroom from anywhere in the world. Engage in real-time Q&A sessions, participate in interactive workshops, and connect with instructors and fellow students. Our daily schedule covers a vast range of topics, so there’s always something new to learn and experience.'
     },
     {
         icon: React.createElement('i', { className: "fa-solid fa-network-wired text-3xl text-sky-500" }),
         title: 'Global Community',
         description: 'Connect with a global community of like-minded individuals.',
         href: '#/global-community',
+        details: 'You are not on this journey alone. Join our private social network to connect with millions of members from over 200 countries. Share your progress, find accountability partners, join local meetups, and build friendships that will last a lifetime. This is your tribe.'
     },
     {
         icon: React.createElement('i', { className: "fa-solid fa-lightbulb text-3xl text-sky-500" }),
         title: 'Meditations',
         description: 'Access a library of powerful meditations for every need.',
         href: '#/meditations',
+        details: 'Transform your state of mind in minutes. Our extensive library features over 1,000 guided meditations, soundscapes, and ambient tracks designed for focus, relaxation, sleep, and peak performance. Led by world-renowned experts, you’ll find the perfect session for any moment of your day.'
     }
 ];
 

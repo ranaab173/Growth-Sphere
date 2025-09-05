@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Button from './ui/Button';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+    isAuthenticated: boolean;
+    onLogout: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ isAuthenticated, onLogout }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -35,8 +40,17 @@ const Header: React.FC = () => {
                     <button className="text-gray-600 hover:text-gray-900 transition-colors">
                         <i className="fa-solid fa-search"></i>
                     </button>
-                    <a href="#/login" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Log In</a>
-                    <Button href="#/join" variant="outline" size="sm">Join Growth Sphere</Button>
+                    {isAuthenticated ? (
+                        <>
+                            <a href="#/account" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">My Account</a>
+                            <Button onClick={onLogout} variant="outline" size="sm">Log Out</Button>
+                        </>
+                    ) : (
+                         <>
+                            <a href="#/login" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Log In</a>
+                            <Button href="#/join" variant="outline" size="sm">Join Growth Sphere</Button>
+                        </>
+                    )}
                 </div>
 
                 <div className="lg:hidden">
@@ -54,8 +68,17 @@ const Header: React.FC = () => {
                             <a key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-gray-600 hover:text-gray-900 transition-colors text-lg">{link.name}</a>
                         ))}
                         <div className="flex flex-col items-center space-y-4 pt-4">
-                            <a href="#/login" onClick={() => setIsMenuOpen(false)} className="text-gray-600 hover:text-gray-900 transition-colors">Log In</a>
-                            <Button href="#/join" onClick={() => setIsMenuOpen(false)} variant="primary" size="md">Join Growth Sphere</Button>
+                             {isAuthenticated ? (
+                                <>
+                                    <a href="#/account" onClick={() => setIsMenuOpen(false)} className="text-gray-600 hover:text-gray-900 transition-colors">My Account</a>
+                                    <Button onClick={() => { onLogout(); setIsMenuOpen(false); }} variant="primary" size="md">Log Out</Button>
+                                </>
+                            ) : (
+                                <>
+                                    <a href="#/login" onClick={() => setIsMenuOpen(false)} className="text-gray-600 hover:text-gray-900 transition-colors">Log In</a>
+                                    <Button href="#/join" onClick={() => setIsMenuOpen(false)} variant="primary" size="md">Join Growth Sphere</Button>
+                                </>
+                            )}
                         </div>
                     </nav>
                 </div>

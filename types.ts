@@ -27,6 +27,7 @@ export interface Feature {
     title: string;
     description: string;
     href: string;
+    details: string;
 }
 
 export interface Blog {
